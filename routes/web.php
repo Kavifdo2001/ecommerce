@@ -116,18 +116,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-Route::get('/user-home', [UserController::class, 'UserHome'])->name('user.home');
-Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
-Route::post('/category/update/{id}', [CategoryController::class, 'updateCategory'])->name('update.category');
-Route::get('/about-us', [UserController::class, 'aboutUs'])->name('user.aboutUs');
-Route::get('/contact-us', [UserController::class, 'contactUs'])->name('user.contactUs');
-Route::get('/wish-list', [UserController::class, 'wishlist'])->name('user.wishlist');
-Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-Route::get('/profile', [OrderController::class, 'orderHistory'])->name('profile');
-Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.updateProfile');
-Route::get('/product', [UserController::class, 'product'])->name('user.product');
-Route::get('/bulk-Orders', [UserController::class, 'bulk'])->name('user.bulk');
+    Route::get('/user-home', [UserController::class, 'UserHome'])->name('user.home');
+    Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
+    Route::post('/category/update/{id}', [CategoryController::class, 'updateCategory'])->name('update.category');
+    Route::get('/about-us', [UserController::class, 'aboutUs'])->name('user.aboutUs');
+    Route::get('/contact-us', [UserController::class, 'contactUs'])->name('user.contactUs');
+    Route::get('/wish-list', [UserController::class, 'wishlist'])->name('user.wishlist');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/profile', [OrderController::class, 'orderHistory'])->name('profile');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.updateProfile');
+    Route::get('/product', [UserController::class, 'product'])->name('user.product');
+
 
 
 
