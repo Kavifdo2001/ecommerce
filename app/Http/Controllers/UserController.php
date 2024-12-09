@@ -12,11 +12,11 @@ class UserController extends Controller
 {
     public function UserHome()
     {
-        // Fetch all products and categories
-        $products = Product::all();
-        $categories = Category:: where('parent_id', 0)->get(); // Fetch categories
 
-        // Pass both products and categories to the view
+        $products = Product::all();
+        $categories = Category:: where('parent_id', 0)->get();
+
+
         return view('User.index', compact('products', 'categories'));
     }
 
@@ -30,20 +30,6 @@ class UserController extends Controller
         return view('user.contactUs');
     }
 
-//    public function product()
-//    {
-//        $products = Product::all();
-//
-//        $isInCart = false;
-//        if (Auth::check()) {
-//            $userId = Auth::id();
-//            $isInCart = Cart::where('user_id', $userId)->where('product_id', $id)->exists();
-//        }
-//
-//        return view('user.product', compact('products', 'isInCart'));
-//
-//
-//    }
 
     public function product()
     {
@@ -75,12 +61,12 @@ class UserController extends Controller
     {
 
 
-        $userId = Auth::id(); // Assuming you have user authentication in place
+        $userId = Auth::id();
         $orders = Order::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
 
-        // return view('User.profile', compact('orders'));
 
-        $user = Auth::user(); // Get the authenticated user
+
+        $user = Auth::user();
         return view('user.profile', compact('user','orders')); // Pass the user data to the view
     }
 

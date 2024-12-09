@@ -75,14 +75,13 @@ class CategoryController extends Controller
 
         $category = Category::findOrFail($id);
         $category->category_name = $request->input('category_name');
-        
+
         if ($request->hasFile('img')) {
             // Delete the old image if exists
             if ($category->img) {
                 Storage::delete(public_path($category->img));
             }
 
-            // Store the new image
             $imageName = time() . '_' . $request->file('img')->getClientOriginalName();
             $path = 'assets/upload/category/';
             $request->file('img')->move(public_path($path), $imageName);
@@ -110,13 +109,13 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $subCategories = Category::where('parent_id', $id)->get();
 
-        // Delete the category image if exists
+
         if ($category->img) {
             Storage::delete(public_path($category->img));
         }
 
         foreach ($subCategories as $subCategory) {
-            // Delete the subcategory images if they have any
+
             if ($subCategory->img) {
                 Storage::delete(public_path($subCategory->img));
             }
@@ -150,13 +149,13 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        // Fetch the category by its ID
+
         $category = Category::findOrFail($id);
 
-        // Fetch the subcategories related to the category
+
         $subCategory = SubCategory::where('category_id', $id)->get();
 
-        // Pass the variables to the view
+
         return view('admin.view-category', compact('category', 'subCategory'));
     }
 }

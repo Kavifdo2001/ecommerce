@@ -50,40 +50,10 @@ class CartController extends Controller
 
         return back()->with('success', 'Item added to cart successfully!');
 
-//        return response()->json(['success' => 'Product added to cart', 'cart_count' => count($cart)]);
+
     }
 
-//    public function addToCart(Request $request)
-//    {
-//        $productId = $request->input('product_id');
-//        $quantity = $request->input('quantity', 1);
-//
-//        $cart = session()->get('cart', []);
-//
-//        if(isset($cart[$productId])) {
-//            $cart[$productId]['quantity'] += $quantity;
-//        } else {
-//            $cart[$productId] = [
-//                "id" => $productId,
-//                "name" => $request->input('product_name'),
-//                "quantity" => $quantity,
-//                "price" => $request->input('product_price'),
-//                "image" => $request->input('product_image') // Add this line
-//            ];
-//        }
-//
-//        session()->put('cart', $cart);
-//
-//        $userId = auth()->id();
-//        Cart::create([
-//            'user_id' => $userId,
-//            'product_id' => $request->product_id,
-//            'quantity' => $request->quantity,
-//        ]);
-//
-//
-//        return response()->json(['success' => 'Product added to cart', 'cart_count' => count($cart)]);
-//    }
+
     public function cartCount()
     {
         $cart = session()->get('cart', []);
@@ -117,7 +87,7 @@ class CartController extends Controller
 
         $grandTotal = $cartItems->sum(function($cart) {
             return $cart->quantity * $cart->product->amount;
-        }); // Calculate grand total
+        });
         $tax = $grandTotal * 0.1;
         $total = $grandTotal + $tax;
 
@@ -157,24 +127,19 @@ class CartController extends Controller
         $id = auth()->id();
 
         $cartItems = Cart::where('user_id', $id)->get();
-        // Check if the cart is empty
+
         if ($cartItems->isEmpty()) {
             return redirect()->back()->with('error', 'Your cart is empty. Please add items to your cart before placing an order.');
         }
         $grandTotal = $cartItems->sum(function($cart) {
             return $cart->quantity * $cart->product->amount;
-        }); // Calculate grand total
+        });
         $tax = $grandTotal * 0.1;
         $total = $grandTotal + $tax;
         return view('User.cart.checkout',compact('cartItems', 'grandTotal', 'tax', 'total','newQuoteNo'));
     }
 
-//    public function order()
-//    {
-//        $id = auth()->id();
-//        $cartItems = Cart::where('user_id', $id)->get();
-//        $cartItems->delete();
-//    }
+
 
     public function order(Request $request)
     {
@@ -198,8 +163,6 @@ class CartController extends Controller
             ]);
         }
 
-
-        // Remove cart items for the user
         $cartItems = Cart::where('user_id', $userId)->get();
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();

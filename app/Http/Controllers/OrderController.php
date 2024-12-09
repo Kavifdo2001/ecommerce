@@ -80,10 +80,9 @@ class OrderController extends Controller
     // View details of a specific order
     public function adminViewOrder($id)
     {
-//        $order = Order::with('orderItems.product')->findOrFail($id);
 
         $order = Order::with('orderItems.product')->findOrFail($id);
-//        dd($order->toArray());
+
 
         return view('admin.orders.viewOrder', compact('order'));
     }
@@ -100,10 +99,6 @@ class OrderController extends Controller
     $order->reason = $request->input('reason');
     $order->save();
 
-    // Optionally send an email
-    // if ($order->status === 'rejected') {
-    //     Mail::to($order->user->email)->send(new OrderRejectedMail($order));
-    // }
 
     return redirect()->route('admin.orders.index')->with('success', 'Order status updated successfully.');
 }

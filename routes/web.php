@@ -86,21 +86,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('delete.category');
     Route::get('admin/view-category/{id}', [CategoryController::class, 'viewCategory'])->name('view.category');
 
-    Route::get('admin/projects-index', [ProjectController::class, 'projects'])->name('projects.index');
-    Route::get('admin/projects-create', [ProjectController::class, 'projectCreate'])->name('projects.create');
-    Route::post('admin/add-projects', [ProjectController::class, 'addProject'])->name('add.projects');
-    Route::get('admin/projects-view/{id}', [ProjectController::class, 'viewProject'])->name('projects.view');
-    Route::get('admin/projects-delete/{id}', [ProjectController::class, 'deleteProject'])->name('projects.delete');
-    Route::get('admin/projects-edit/{project}', [ProjectController::class, 'editProject'])->name('projects.edit');
-    Route::put('/projects/{id}', [ProjectController::class, 'updateProject'])->name('projects.update');
-    Route::delete('admin/projects/{project}/removeImage', [ProjectController::class, 'removeImage'])->name('projects.removeImage');
-    Route::get('admin/projects-edit/{project}', [ProjectController::class, 'editProject'])->name('projects.edit');
 
-// Route for submitting the bulk order form
-Route::post('/bulk-order-submit', [BulkOrderController::class, 'submitBulkOrder'])->name('bulk.order.submit');
-Route::get('/admin/bulk-orders', [BulkOrderController::class, 'bulkOrders'])->name('bulkorders.index');
-Route::patch('/admin/bulk-orders/{id}/response', [BulkOrderController::class, 'updateResponse'])->name('bulkorders.updateResponse');
-Route::patch('/admin/bulk-orders/{id}/update', [BulkOrderController::class, 'updateResponseAndNote'])->name('bulkorders.updateResponseAndNote');
 
     // Admin Order List
     Route::get('admin/orders', [OrderController::class, 'adminOrderList'])->name('admin.orders.index');

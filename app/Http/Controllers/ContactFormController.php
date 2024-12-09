@@ -10,7 +10,8 @@ class ContactFormController extends Controller
 {
     public function sendContactForm(Request $request)
     {
-        // Validate the form data
+        $mailto = 'kavinduf774@gail.com';
+
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -19,10 +20,10 @@ class ContactFormController extends Controller
             'message' => 'required|string|max:1000',
         ]);
 
-        // Send the email
-        Mail::to('kannangaraharitha@gmail.com')->send(new ContactFormMail($data));
 
-        // Redirect back with a success message
+        Mail::to($mailto)->send(new ContactFormMail($data));
+
+
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }
